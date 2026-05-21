@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>動画シアター</title>
     <style>
-        /* 全体を映画館のように黒ベースに */
         body {
             background-color: #0b0f19;
             color: #ffffff;
@@ -18,10 +17,8 @@
             justify-content: center;
             min-height: 100vh;
         }
-
-        /* 動画コンテナの初期状態（最初は隠しておく） */
         .video-container {
-            display: none; /* ★ パスワードが合うまで非表示 */
+            display: none;
             width: 90%;
             max-width: 800px;
             background: #000000;
@@ -30,24 +27,20 @@
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         video {
             width: 100%;
             height: auto;
             display: block;
         }
-
         .video-info {
             padding: 20px;
             background: rgba(255, 255, 255, 0.02);
         }
-
         h1 {
             font-size: 1.4rem;
             margin: 0 0 8px 0;
             letter-spacing: 1px;
         }
-
         p {
             font-size: 0.9rem;
             color: #94a3b8;
@@ -69,18 +62,12 @@
     </div>
 
     <script>
-        // ページが開いた瞬間にパスワード入力を求める
         const input = prompt("合言葉を入力してください：");
-
-        // 入力された文字をBase64に変換
         const encodedInput = input ? btoa(input) : "";
 
-        // 【修正】「nanani」をBase64にすると正しくは「bmFuYW5p」になります！
         if (encodedInput === "bmFuYW5p") {
-            // パスワードが合っていたら動画を表示
             document.getElementById("player-box").style.display = "block";
         } else {
-            // 間違っていたら警告を出して画面を真っ白のままにする
             alert("合言葉が違います。アクセス権限がありません。");
             document.body.innerHTML = '<div style="color: #64748b; font-size: 1.2rem;">✦ Access Denied ✦</div>';
         }
