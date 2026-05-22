@@ -17,8 +17,13 @@
             justify-content: center;
             min-height: 100vh;
         }
+
+        /* ★ 昔のコードの「hidden」方式を採用 */
+        .hidden {
+            display: none !important;
+        }
+
         .video-container {
-            display: none;
             width: 90%;
             max-width: 800px;
             background: #000000;
@@ -27,20 +32,26 @@
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* ★ 昔のコードと同じ強力なスタイル */
         video {
             width: 100%;
             height: auto;
             display: block;
+            background: #000;
         }
+
         .video-info {
             padding: 20px;
             background: rgba(255, 255, 255, 0.02);
         }
+
         h1 {
             font-size: 1.4rem;
             margin: 0 0 8px 0;
             letter-spacing: 1px;
         }
+
         p {
             font-size: 0.9rem;
             color: #94a3b8;
@@ -50,11 +61,9 @@
 </head>
 <body>
 
-    <div class="video-container" id="player-box">
-        <video controls playsinline id="my-video">
-            <source src="movie.mp4" type="video/mp4">
-            お使いのブラウザは動画再生に対応していません。
-        </video>
+    <div class="video-container hidden" id="player-box">
+        <video src="movie.mp4" controls playsinline id="my-video"></video>
+        
         <div class="video-info">
             <h1>✦ Special Movie Theater ✦</h1>
             <p>認証に成功しました。限定動画を再生します。</p>
@@ -62,14 +71,21 @@
     </div>
 
     <script>
+        // ページが開いた瞬間にパスワード入力を求める
         const input = prompt("合言葉を入力してください：");
         const encodedInput = input ? btoa(input) : "";
 
+        // 「nanani」のBase64判定
         if (encodedInput === "bmFuYW5p") {
-            document.getElementById("player-box").style.display = "block";
+            // ★ 昔のコードと同じく、hiddenを取り除いてドカンと表示！
+            document.getElementById("player-box").classList.remove("hidden");
+            
+            // パソコンのブラウザ用に動画を自動準備
+            const vid = document.getElementById("my-video");
+            vid.load();
         } else {
             alert("合言葉が違います。アクセス権限がありません。");
-            document.body.innerHTML = '<div style="color: #64748b; font-size: 1.2rem;">✦ Access Denied ✦</div>';
+            document.body.innerHTML = '<div style="color: #64748b; font-size: 1.2rem; text-align: center; margin-top: 50px;">✦ Access Denied ✦</div>';
         }
     </script>
 
