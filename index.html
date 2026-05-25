@@ -18,11 +18,6 @@
             min-height: 100vh;
         }
 
-        /* ★ 昔のコードの「hidden」方式を採用 */
-        .hidden {
-            display: none !important;
-        }
-
         .video-container {
             width: 90%;
             max-width: 800px;
@@ -33,7 +28,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ★ 昔のコードと同じ強力なスタイル */
         video {
             width: 100%;
             height: auto;
@@ -61,7 +55,7 @@
 </head>
 <body>
 
-    <div class="video-container hidden" id="player-box">
+    <div class="video-container" id="player-box">
         <video src="movie.mp4" controls playsinline id="my-video"></video>
         
         <div class="video-info">
@@ -71,22 +65,9 @@
     </div>
 
     <script>
-        // ページが開いた瞬間にパスワード入力を求める
-        const input = prompt("合言葉を入力してください：");
-        const encodedInput = input ? btoa(input) : "";
-
-        // 「nanani」のBase64判定
-        if (encodedInput === "bmFuYW5p") {
-            // ★ 昔のコードと同じく、hiddenを取り除いてドカンと表示！
-            document.getElementById("player-box").classList.remove("hidden");
-            
-            // パソコンのブラウザ用に動画を自動準備
-            const vid = document.getElementById("my-video");
-            vid.load();
-        } else {
-            alert("合言葉が違います。アクセス権限がありません。");
-            document.body.innerHTML = '<div style="color: #64748b; font-size: 1.2rem; text-align: center; margin-top: 50px;">✦ Access Denied ✦</div>';
-        }
+        // パソコンのブラウザ用に動画を自動準備
+        const vid = document.getElementById("my-video");
+        vid.load();
     </script>
 
 </body>
